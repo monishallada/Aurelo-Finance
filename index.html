@@ -9,48 +9,74 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #0d0d0d;
+      background-color: #000;
       color: white;
+      display: flex;
     }
 
-    .container {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-width: 1400px;
-      margin: auto;
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      height: 100vh;
+      background-color: #0a0a0a;
+      padding: 30px 20px;
+      box-shadow: 2px 0 8px rgba(255,255,255,0.05);
+    }
+
+    .sidebar h2 {
+      color: #a78bfa;
+      margin-bottom: 30px;
+      font-size: 1.5rem;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      padding: 10px 0;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
     }
 
     .section-title {
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .grid-4, .grid-2, .grid-2small {
+      display: grid;
+      gap: 20px;
     }
 
     .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
     .grid-2 {
-      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-      gap: 20px;
     }
 
     .grid-2small {
-      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-      gap: 20px;
     }
 
     .card {
-      background-color: rgba(255, 255, 255, 0.04);
+      background-color: rgba(255,255,255,0.03);
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border: 1px solid white;
     }
 
     .value {
@@ -78,7 +104,7 @@
     th, td {
       text-align: left;
       padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
     .green { color: #24e07f; }
@@ -86,7 +112,16 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="sidebar">
+    <h2>Aurelo</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Real Estate</a>
+    <a href="#">Businesses</a>
+    <a href="#">Stocks</a>
+    <a href="#">Pricing</a>
+  </div>
+
+  <div class="main">
     <h1 class="section-title">Dashboard</h1>
 
     <!-- Top Stats -->
@@ -113,7 +148,7 @@
       </div>
     </div>
 
-    <!-- Line Charts -->
+    <!-- Charts -->
     <div class="grid-2">
       <div class="card">
         <div class="section-title">Portfolio Growth</div>
@@ -127,18 +162,12 @@
       </div>
     </div>
 
-    <!-- Diversification and Watchlist -->
+    <!-- Diversification & Watchlist -->
     <div class="grid-2small">
       <div class="card">
         <div class="section-title">Portfolio Diversification</div>
         <div class="small">Your investment allocation across different asset classes</div>
         <canvas id="donutChart"></canvas>
-        <div class="small" style="margin-top: 10px; text-align: center;">
-          <span style="color:#a78bfa;">● Stocks</span> &nbsp;
-          <span style="color:#c084fc;">● Bonds</span> &nbsp;
-          <span style="color:#d8b4fe;">● Real Estate</span> &nbsp;
-          <span style="color:#e9d5ff;">● Commodities</span>
-        </div>
       </div>
       <div class="card">
         <div class="section-title">Watchlist</div>
@@ -185,7 +214,10 @@
           tension: 0.3
         }]
       },
-      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false } } }
+      options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: false } }
+      }
     });
 
     new Chart(document.getElementById('portfolioChart'), lineConfig("Portfolio", [100000,102000,106000,109000,112000,115000,119000,122000,126000,129000,132000], "#a78bfa"));
