@@ -1,196 +1,111 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
+    <div class="sidebar">
+  <h2>Aurelo</h2>
+  <ul>
+    <li><a href="index.html">Dashboard</a></li>
+    <li><a href="real-estate.html">Real Estate</a></li>
+    <li><a href="businesses.html">Businesses</a></li>
+    <li><a href="stocks.html">Stocks</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+  </ul>
+</div>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Financial Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #000;
-      color: white;
-      display: flex;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      width: 220px;
-      height: 100vh;
-      background-color: #0a0a0a;
-      padding: 30px 20px;
-      box-shadow: 2px 0 8px rgba(255,255,255,0.05);
-    }
-
-    .sidebar h2 {
-      color: #a78bfa;
-      margin-bottom: 30px;
-      font-size: 1.5rem;
-    }
-
-    .sidebar a {
-      display: block;
-      color: #ccc;
-      text-decoration: none;
-      padding: 10px 0;
-      font-size: 1rem;
-      transition: 0.2s;
-    }
-
-    .sidebar a:hover {
-      color: #fff;
-    }
-
-    /* Main Content */
-    .main {
-      flex: 1;
-      padding: 30px;
-      overflow-y: auto;
-    }
-
-    .section-title {
-      font-size: 1.7rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .grid-4, .grid-2, .grid-2small {
-      display: grid;
-      gap: 20px;
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-    }
-
-    .grid-2small {
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    }
-
-    .card {
-      background-color: rgba(255,255,255,0.03);
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid white;
-    }
-
-    .value {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-top: 5px;
-    }
-
-    .small {
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-
-    canvas {
-      width: 100% !important;
-      height: 300px !important;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    th, td {
-      text-align: left;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .green { color: #24e07f; }
-    .red { color: #ff6a6a; }
-  </style>
+  <title>Aurelo Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="sidebar">
     <h2>Aurelo</h2>
-    <a href="#">Dashboard</a>
-    <a href="#">Real Estate</a>
-    <a href="#">Businesses</a>
-    <a href="#">Stocks</a>
-    <a href="#">Pricing</a>
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="real-estate.html">Real Estate</a></li>
+      <li><a href="businesses.html">Businesses</a></li>
+      <li><a href="stocks.html">Stocks</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+    </ul>
   </div>
 
-  <div class="main">
-    <h1 class="section-title">Dashboard</h1>
+  <div class="content">
+    <h1>Dashboard</h1>
 
-    <!-- Top Stats -->
-    <div class="grid-4">
+    <div class="top-cards">
       <div class="card">
-        <div class="small">Checking Account</div>
-        <div class="value">$15,847.32</div>
-        <div class="small">Available balance</div>
+        <p class="title">Checking Account</p>
+        <h2>$15,847.32</h2>
+        <p>Available balance</p>
       </div>
       <div class="card">
-        <div class="small">Portfolio Value</div>
-        <div class="value green">$124,532.18</div>
-        <div class="small green">+2.4% from last month</div>
+        <p class="title">Portfolio Value</p>
+        <h2 class="green">$124,532.18</h2>
+        <p class="green">+2.4% from last month</p>
       </div>
       <div class="card">
-        <div class="small">Today's P&L</div>
-        <div class="value green">+1,234.56</div>
-        <div class="small green">+0.99% today</div>
+        <p class="title">Today's P&amp;L</p>
+        <h2 class="green">+$1,234.56</h2>
+        <p class="green">+0.99% today</p>
       </div>
       <div class="card">
-        <div class="small">Fed Rate</div>
-        <div class="value red">5.25%</div>
-        <div class="small red">+0.25% last meeting</div>
+        <p class="title">Fed Rate</p>
+        <h2 class="red">5.25%</h2>
+        <p class="red">+0.25% last meeting</p>
       </div>
     </div>
 
-    <!-- Charts -->
-    <div class="grid-2">
-      <div class="card">
-        <div class="section-title">Portfolio Growth</div>
-        <div class="small">Your portfolio value over the last year</div>
-        <canvas id="portfolioChart"></canvas>
+    <div class="row">
+      <div class="box">
+        <h3>Portfolio Growth</h3>
+        <p>Your portfolio value over the last year</p>
+        <div class="placeholder">[Line Chart Placeholder]</div>
       </div>
-      <div class="card">
-        <div class="section-title">Net Worth Trend</div>
-        <div class="small">Your total net worth over time</div>
-        <canvas id="netWorthChart"></canvas>
+      <div class="box">
+        <h3>Net Worth Trend</h3>
+        <p>Your total net worth over time</p>
+        <div class="placeholder">[Line Chart Placeholder]</div>
       </div>
     </div>
 
-    <!-- Diversification & Watchlist -->
-    <div class="grid-2small">
-      <div class="card">
-        <div class="section-title">Portfolio Diversification</div>
-        <div class="small">Your investment allocation across different asset classes</div>
-        <canvas id="donutChart"></canvas>
+    <div class="row">
+      <div class="box">
+        <h3>Portfolio Diversification</h3>
+        <p>Your investment allocation across different asset classes</p>
+        <div class="placeholder">[Donut Chart Placeholder]</div>
+        <div class="legend">
+          <span class="dot purple"></span> Stocks
+          <span class="dot light-purple"></span> Bonds
+          <span class="dot lighter-purple"></span> Real Estate
+          <span class="dot faded-purple"></span> Commodities
+        </div>
       </div>
-      <div class="card">
-        <div class="section-title">Watchlist</div>
-        <div class="small">Stocks and assets you're tracking</div>
+      <div class="box">
+        <h3>Watchlist</h3>
+        <p>Stocks and assets you're tracking</p>
         <table>
-          <thead><tr><th>Symbol</th><th>Price</th><th>Change</th></tr></thead>
+          <thead>
+            <tr><th>Symbol</th><th>Price</th><th>Change</th></tr>
+          </thead>
           <tbody>
-            <tr><td>AAPL<br><span class="small">Apple Inc.</span></td><td>$175.43</td><td class="green">+2.34%</td></tr>
-            <tr><td>GOOGL<br><span class="small">Alphabet Inc.</span></td><td>$138.21</td><td class="red">-0.87%</td></tr>
-            <tr><td>MSFT<br><span class="small">Microsoft Corp.</span></td><td>$378.85</td><td class="green">+1.23%</td></tr>
-            <tr><td>TSLA<br><span class="small">Tesla Inc.</span></td><td>$248.50</td><td class="red">-3.45%</td></tr>
-            <tr><td>NVDA<br><span class="small">NVIDIA Corp.</span></td><td>$875.28</td><td class="green">+5.67%</td></tr>
+            <tr><td>AAPL</td><td>$175.43</td><td class="green">+2.34%</td></tr>
+            <tr><td>GOOGL</td><td>$138.21</td><td class="red">-0.87%</td></tr>
+            <tr><td>MSFT</td><td>$378.85</td><td class="green">+1.23%</td></tr>
+            <tr><td>TSLA</td><td>$248.50</td><td class="red">-3.45%</td></tr>
+            <tr><td>NVDA</td><td>$875.28</td><td class="green">+5.67%</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Market Indexes -->
-    <div class="card">
-      <div class="section-title">Market Indexes</div>
-      <div class="small">Major market index performance</div>
+    <div class="box full">
+      <h3>Market Indexes</h3>
+      <p>Major market index performance</p>
       <table>
-        <thead><tr><th>Index</th><th>Value</th><th>Change</th></tr></thead>
+        <thead>
+          <tr><th>Index</th><th>Value</th><th>Change</th></tr>
+        </thead>
         <tbody>
           <tr><td>S&P 500</td><td>4,567.89</td><td class="green">+0.75%</td></tr>
           <tr><td>Dow Jones</td><td>35,123.45</td><td class="green">+0.42%</td></tr>
@@ -200,45 +115,5 @@
       </table>
     </div>
   </div>
-
-  <script>
-    const lineConfig = (label, data, color) => ({
-      type: 'line',
-      data: {
-        labels: ['Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-        datasets: [{
-          label: label,
-          data: data,
-          fill: false,
-          borderColor: color,
-          tension: 0.3
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: false } }
-      }
-    });
-
-    new Chart(document.getElementById('portfolioChart'), lineConfig("Portfolio", [100000,102000,106000,109000,112000,115000,119000,122000,126000,129000,132000], "#a78bfa"));
-    new Chart(document.getElementById('netWorthChart'), lineConfig("Net Worth", [200000,210000,212000,215000,220000,226000,230000,238000,245000,252000,260000], "#8b5cf6"));
-
-    new Chart(document.getElementById('donutChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Stocks', 'Bonds', 'Real Estate', 'Commodities'],
-        datasets: [{
-          data: [40, 25, 20, 15],
-          backgroundColor: ['#a78bfa','#c084fc','#d8b4fe','#e9d5ff'],
-          borderWidth: 2,
-        }]
-      },
-      options: {
-        plugins: {
-          legend: { display: false }
-        }
-      }
-    });
-  </script>
 </body>
 </html>
