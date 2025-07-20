@@ -1,113 +1,123 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Real Estate</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    #sidebar {
+      position: fixed;
+      left: -220px;
+      top: 0;
+      width: 220px;
+      height: 100%;
+      background-color: #121212;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+      transition: left 0.3s ease;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 60px;
+    }
+
+    #sidebar ul li {
+      margin: 15px 0;
+    }
+
+    #sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: block;
+    }
+
+    #sidebar ul li a:hover {
+      background: #1f1f1f;
+      padding: 6px 8px;
+      border-radius: 6px;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      left: 220px;
+      top: 20px;
+      width: 40px;
+      height: 40px;
+      background: #333;
+      color: white;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      z-index: 1001;
+    }
+
+    .sidebar-active {
+      left: 0 !important;
+    }
+
+    body.shifted .main-content {
+      margin-left: 220px;
+    }
+
+    @media (max-width: 768px) {
+      .toggle-btn {
+        left: 100%;
+      }
+
+      body.shifted .main-content {
+        margin-left: 0;
+      }
+    }
+
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+      background-color: #0d0d0d;
+      color: white;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+  </style>
 </head>
 <body>
-    <!-- Sidebar HTML -->
-<div id="sidebar">
-  <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
-  <ul>
-    <li><a href="index.html">Dashboard</a></li>
-    <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="real-estate.html">Real Estate</a></li>
-    <li><a href="stocks.html">Stocks</a></li>
-  </ul>
-</div>
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="real-estate.html">Real Estate</a></li>
+      <li><a href="stocks.html">Stocks</a></li>
+    </ul>
+  </div>
 
-<style>
-  /* Sidebar CSS */
-  #sidebar {
-    position: fixed;
-    left: -200px;
-    top: 0;
-    width: 200px;
-    height: 100%;
-    background-color: #121212;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    transition: left 0.3s ease;
-    z-index: 1000;
-  }
-
-  #sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 60px 0 0 0;
-  }
-
-  #sidebar ul li {
-    padding: 15px 20px;
-    border-bottom: 1px solid #222;
-  }
-
-  #sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.95rem;
-    display: block;
-    transition: background 0.2s;
-  }
-
-  #sidebar ul li a:hover {
-    background: #1f1f1f;
-  }
-
-  .toggle-btn {
-    position: absolute;
-    left: 200px;
-    top: 20px;
-    width: 40px;
-    height: 40px;
-    background: #333;
-    color: white;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    z-index: 1001;
-  }
-
-  .sidebar-active {
-    left: 0 !important;
-  }
-
-  /* For page content shift (optional) */
-  .shifted {
-    margin-left: 200px;
-    transition: margin 0.3s ease;
-  }
-
-  @media (max-width: 768px) {
-    .toggle-btn {
-      left: 100%;
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      const body = document.body;
+      sidebar.classList.toggle("sidebar-active");
+      body.classList.toggle("shifted");
     }
+  </script>
 
-    .shifted {
-      margin-left: 0;
-    }
-  }
-</style>
-
-<script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    const body = document.body;
-    sidebar.classList.toggle("sidebar-active");
-    body.classList.toggle("shifted");
-  }
-</script>
-
-  
-
-  <div class="content">
+  <!-- Main Content -->
+  <div class="main-content">
     <h1>Real Estate & Land</h1>
 
     <div class="top-cards">
@@ -131,6 +141,36 @@
         <h2>89</h2>
         <p>Development ready</p>
       </div>
-        <!DOCTYPE html>
-<html lang="en">
-  
+    </div>
+
+    <div class="row">
+      <div class="box">
+        <h3>Top Real Estate Markets</h3>
+        <p>Hot markets by growth and investment activity</p>
+        <table>
+          <thead>
+            <tr><th>City</th><th>Median Price</th><th>YoY Growth</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Austin, TX</td><td>$513,000</td><td class="green">+6.7%</td></tr>
+            <tr><td>Charlotte, NC</td><td>$379,000</td><td class="green">+5.2%</td></tr>
+            <tr><td>Tampa, FL</td><td>$345,000</td><td class="green">+4.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box">
+        <h3>Investment Opportunities</h3>
+        <p>Trending real estate projects and REITs</p>
+        <ul>
+          <li>🔹 Urban revitalization projects</li>
+          <li>🔹 Commercial real estate ETFs</li>
+          <li>🔹 Mixed-use developments</li>
+          <li>🔹 Build-to-rent housing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
