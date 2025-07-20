@@ -7,16 +7,102 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Aurelo</h2>
-    <ul>
-      <li><a href="index.html">Dashboard</a></li>
-      <li><a href="real-estate.html">Real Estate</a></li>
-      <li><a href="businesses.html">Businesses</a></li>
-      <li><a href="stocks.html">Stocks</a></li>
-      <li><a href="pricing.html">Pricing</a></li>
-    </ul>
-  </div>
+<!-- Sidebar HTML -->
+<div id="sidebar">
+  <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+  <ul>
+    <li><a href="index.html">Dashboard</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="real-estate.html">Real Estate</a></li>
+    <li><a href="stocks.html">Stocks</a></li>
+  </ul>
+</div>
+
+<style>
+  /* Sidebar CSS */
+  #sidebar {
+    position: fixed;
+    left: -200px;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #121212;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  #sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 60px 0 0 0;
+  }
+
+  #sidebar ul li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #222;
+  }
+
+  #sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: block;
+    transition: background 0.2s;
+  }
+
+  #sidebar ul li a:hover {
+    background: #1f1f1f;
+  }
+
+  .toggle-btn {
+    position: absolute;
+    left: 200px;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    background: #333;
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    z-index: 1001;
+  }
+
+  .sidebar-active {
+    left: 0 !important;
+  }
+
+  /* For page content shift (optional) */
+  .shifted {
+    margin-left: 200px;
+    transition: margin 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .toggle-btn {
+      left: 100%;
+    }
+
+    .shifted {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const body = document.body;
+    sidebar.classList.toggle("sidebar-active");
+    body.classList.toggle("shifted");
+  }
+</script>
+
 
   <div class="content">
     <h1>Dashboard</h1>
