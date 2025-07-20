@@ -1,38 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aurelo Pricing</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    #sidebar {
+      position: fixed;
+      left: -220px;
+      top: 0;
+      width: 220px;
+      height: 100%;
+      background-color: #121212;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+      transition: left 0.3s ease;
+      z-index: 1000;
+      padding: 20px;
     }
 
-    body 
-    {
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 60px;
+    }
+
+    #sidebar ul li {
+      margin: 15px 0;
+    }
+
+    #sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: block;
+    }
+
+    #sidebar ul li a:hover {
+      background: #1f1f1f;
+      padding: 6px 8px;
+      border-radius: 6px;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      left: 220px;
+      top: 20px;
+      width: 40px;
+      height: 40px;
+      background: #333;
+      color: white;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      z-index: 1001;
+    }
+
+    .sidebar-active {
+      left: 0 !important;
+    }
+
+    body.shifted .main-content {
+      margin-left: 220px;
+    }
+
+    @media (max-width: 768px) {
+      .toggle-btn {
+        left: 100%;
+      }
+
+      body.shifted .main-content {
+        margin-left: 0;
+      }
+    }
+
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
       background-color: #0d0d0d;
       color: white;
-      font-family: 'Inter', sans-serif;
-      padding: 40px;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    p.subheading {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #aaa;
-      margin-bottom: 50px;
+      min-height: 100vh;
     }
 
     .plans {
@@ -138,164 +192,105 @@
     .contact ul li {
       font-size: 0.9rem;
     }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    p.subheading {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 50px;
+    }
   </style>
 </head>
 <body>
-  <!-- Sidebar HTML -->
-<div id="sidebar">
-  <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
-  <ul>
-    <li><a href="index.html">Dashboard</a></li>
-    <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="real-estate.html">Real Estate</a></li>
-    <li><a href="stocks.html">Stocks</a></li>
-  </ul>
-</div>
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="real-estate.html">Real Estate</a></li>
+      <li><a href="stocks.html">Stocks</a></li>
+    </ul>
+  </div>
 
-<style>
-  /* Sidebar CSS */
-  #sidebar {
-    position: fixed;
-    left: -200px;
-    top: 0;
-    width: 200px;
-    height: 100%;
-    background-color: #121212;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    transition: left 0.3s ease;
-    z-index: 1000;
-  }
-
-  #sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 60px 0 0 0;
-  }
-
-  #sidebar ul li {
-    padding: 15px 20px;
-    border-bottom: 1px solid #222;
-  }
-
-  #sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.95rem;
-    display: block;
-    transition: background 0.2s;
-  }
-
-  #sidebar ul li a:hover {
-    background: #1f1f1f;
-  }
-
-  .toggle-btn {
-    position: absolute;
-    left: 200px;
-    top: 20px;
-    width: 40px;
-    height: 40px;
-    background: #333;
-    color: white;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    z-index: 1001;
-  }
-
-  .sidebar-active {
-    left: 0 !important;
-  }
-
-  /* For page content shift (optional) */
-  .shifted {
-    margin-left: 200px;
-    transition: margin 0.3s ease;
-  }
-
-  @media (max-width: 768px) {
-    .toggle-btn {
-      left: 100%;
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      const body = document.body;
+      sidebar.classList.toggle("sidebar-active");
+      body.classList.toggle("shifted");
     }
+  </script>
 
-    .shifted {
-      margin-left: 0;
-    }
-  }
-</style>
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Choose the plan that fits your needs.</h1>
+    <p class="subheading">Aurelo offers flexible plans designed to grow with you, from individual investors to large enterprises.</p>
 
-<script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    const body = document.body;
-    sidebar.classList.toggle("sidebar-active");
-    body.classList.toggle("shifted");
-  }
-</script>
+    <div class="plans">
+      <!-- Starter -->
+      <div class="card">
+        <h2>Starter</h2>
+        <div class="price">$0<span style="font-size: 1rem;"> USD</span></div>
+        <button>Sign up for free</button>
+        <ul>
+          <li>Basic analytics dashboard</li>
+          <li>5 portfolio tracking slots</li>
+          <li>Community support access</li>
+          <li>Standard market news feed</li>
+        </ul>
+      </div>
 
-  <h1>Choose the plan that fits your needs.</h1>
-  <p class="subheading">Aurelo offers flexible plans designed to grow with you, from individual investors to large enterprises.</p>
+      <!-- Business -->
+      <div class="card">
+        <h2>Business</h2>
+        <div class="price">$15.00<span style="font-size: 1rem;"> USD</span></div>
+        <button>Try for free</button>
+        <ul>
+          <li>Everything in Starter, and</li>
+          <li>Unlimited portfolio tracking</li>
+          <li>Advanced analytics reports</li>
+          <li>Priority email support</li>
+          <li>Customizable alerts</li>
+        </ul>
+      </div>
 
-  <div class="plans">
-    <!-- Starter -->
-    <div class="card">
-      <h2>Starter</h2>
-      <div class="price">$0<span style="font-size: 1rem;"> USD</span></div>
-      <button>Sign up for free</button>
-      <ul>
-        <li>Basic analytics dashboard</li>
-        <li>5 portfolio tracking slots</li>
-        <li>Community support access</li>
-        <li>Standard market news feed</li>
-      </ul>
-    </div>
+      <!-- Business + AI -->
+      <div class="card highlight">
+        <h2>Business + AI <span style="background: #9249f5; color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 5px; margin-left: 10px;">MOST POPULAR</span></h2>
+        <div class="price">$20.00<span style="font-size: 1rem;"> USD</span></div>
+        <button>Try for free</button>
+        <ul>
+          <li>Everything in Business, and</li>
+          <li>AI portfolio recommendations</li>
+          <li>Auto-trading algorithm access</li>
+          <li>Premium data packets</li>
+          <li>Dedicated account manager</li>
+          <li>Exclusive webinars</li>
+        </ul>
+      </div>
 
-    <!-- Business -->
-    <div class="card">
-      <h2>Business</h2>
-      <div class="price">$15.00<span style="font-size: 1rem;"> USD</span></div>
-      <button>Try for free</button>
-      <ul>
-        <li>Everything in Starter, and</li>
-        <li>Unlimited portfolio tracking</li>
-        <li>Advanced analytics reports</li>
-        <li>Priority email support</li>
-        <li>Customizable alerts</li>
-      </ul>
-    </div>
-
-    <!-- Business + AI -->
-    <div class="card highlight">
-      <h2>Business + AI <span style="background: #9249f5; color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 5px; margin-left: 10px;">MOST POPULAR</span></h2>
-      <div class="price">$20.00<span style="font-size: 1rem;"> USD</span></div>
-      <button>Try for free</button>
-      <ul>
-        <li>Everything in Business, and</li>
-        <li>AI portfolio recommendations</li>
-        <li>Auto-trading algorithm access</li>
-        <li>Premium data packets</li>
-        <li>Dedicated account manager</li>
-        <li>Exclusive webinars</li>
-      </ul>
-    </div>
-
-    <!-- Enterprise -->
-    <div class="card contact">
-      <h2>Enterprise</h2>
-      <div class="price">Let's Talk</div>
-      <button>Contact Sales</button>
-      <ul>
-        <li>Everything in Business + AI, and</li>
-        <li>Advanced security (SSO, SCIM)</li>
-        <li>Custom data retention policies</li>
-        <li>Dedicated API access</li>
-        <li>24/7 premium support</li>
-        <li>On-site training & integration</li>
-      </ul>
+      <!-- Enterprise -->
+      <div class="card contact">
+        <h2>Enterprise</h2>
+        <div class="price">Let's Talk</div>
+        <button>Contact Sales</button>
+        <ul>
+          <li>Everything in Business + AI, and</li>
+          <li>Advanced security (SSO, SCIM)</li>
+          <li>Custom data retention policies</li>
+          <li>Dedicated API access</li>
+          <li>24/7 premium support</li>
+          <li>On-site training & integration</li>
+        </ul>
+      </div>
     </div>
   </div>
 </body>
