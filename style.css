@@ -1,12 +1,13 @@
 body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #0f0f0f;
+  background-color: #0d0d0d;
   color: white;
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  transition: margin-left 0.3s ease;
+  margin: 0;
+  padding: 40px;
 }
+
+
 
 .sidebar {
   width: 200px;
